@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="advjava19-uni">
+  <database-model serializer="dbm" dbms="DERBY" family-id="DERBY" format-version="4.19">
+    <root id="1">
+      <ServerVersion>10.10.2.0</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="APP">
+      <Current>1</Current>
+    </schema>
+    <schema id="3" parent="1" name="NULLID"/>
+    <schema id="4" parent="1" name="SQLJ"/>
+    <schema id="5" parent="1" name="SYS"/>
+    <schema id="6" parent="1" name="SYSCAT"/>
+    <schema id="7" parent="1" name="SYSCS_DIAG"/>
+    <schema id="8" parent="1" name="SYSCS_UTIL"/>
+    <schema id="9" parent="1" name="SYSFUN"/>
+    <schema id="10" parent="1" name="SYSIBM"/>
+    <schema id="11" parent="1" name="SYSPROC"/>
+    <schema id="12" parent="1" name="SYSSTAT"/>
+    <table id="13" parent="2" name="DEPARTMENTS"/>
+    <table id="14" parent="2" name="INSTRUCTORS"/>
+    <table id="15" parent="2" name="STUDENTS"/>
+    <column id="16" parent="13" name="CODE">
+      <Position>1</Position>
+      <DataType>VARCHAR(10)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="13" name="NAME">
+      <Position>2</Position>
+      <DataType>VARCHAR(30)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="18" parent="13" name="FACULTY_CODE">
+      <Position>3</Position>
+      <DataType>VARCHAR(5)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="19" parent="13" name="CHAIR_ID">
+      <Position>4</Position>
+      <DataType>INTEGER|4s</DataType>
+    </column>
+    <index id="20" parent="13" name="SQL191210195335610">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CODE</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="21" parent="13" name="SQL200108191436290">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CHAIR_ID</ColNames>
+    </index>
+    <key id="22" parent="13" name="SQL191210195335610">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CODE</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="23" parent="13" name="SQL200108191436290">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CHAIR_ID</ColNames>
+      <RefTableName>INSTRUCTORS</RefTableName>
+      <RefKeyName>SQL200108191024070</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="24" parent="14" name="ID">
+      <Position>1</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="14" name="NAME">
+      <Position>2</Position>
+      <DataType>VARCHAR(30)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="14" name="SURNAME">
+      <Position>3</Position>
+      <DataType>VARCHAR(30)|12s</DataType>
+    </column>
+    <column id="27" parent="14" name="DEPARTMENT_CODE">
+      <Position>4</Position>
+      <DataType>VARCHAR(10)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="28" parent="14" name="SQL200108191024070">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="29" parent="14" name="SQL200108191305100">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>DEPARTMENT_CODE</ColNames>
+    </index>
+    <key id="30" parent="14" name="SQL200108191024070">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="31" parent="14" name="SQL200108191305100">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>DEPARTMENT_CODE</ColNames>
+      <RefTableName>DEPARTMENTS</RefTableName>
+      <RefKeyName>SQL191210195335610</RefKeyName>
+      <RefColNames>CODE</RefColNames>
+    </foreign-key>
+    <column id="32" parent="15" name="ID">
+      <Position>1</Position>
+      <DataType>INTEGER|4s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="15" name="NAME">
+      <Position>2</Position>
+      <DataType>VARCHAR(30)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="15" name="SURNAME">
+      <Position>3</Position>
+      <DataType>VARCHAR(30)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="15" name="DEPARTMENT_CODE">
+      <Position>4</Position>
+      <DataType>VARCHAR(10)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="15" name="EMAIL">
+      <Position>5</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+    </column>
+    <index id="37" parent="15" name="SQL191209195829161">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="38" parent="15" name="SQL200106212858930">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>DEPARTMENT_CODE</ColNames>
+    </index>
+    <index id="39" parent="15" name="SQL191209195829160">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>EMAIL</ColNames>
+    </index>
+    <key id="40" parent="15" name="SQL191209195829161">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="41" parent="15" name="SQL191209195829160">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>EMAIL</ColNames>
+    </key>
+    <foreign-key id="42" parent="15" name="SQL200106212858930">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>DEPARTMENT_CODE</ColNames>
+      <RefTableName>DEPARTMENTS</RefTableName>
+      <RefKeyName>SQL191210195335610</RefKeyName>
+      <RefColNames>CODE</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>
