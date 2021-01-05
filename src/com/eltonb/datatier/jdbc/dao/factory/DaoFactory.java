@@ -1,17 +1,12 @@
 package com.eltonb.datatier.jdbc.dao.factory;
 
-import com.eltonb.datatier.jdbc.dao.impl.DepartmentDaoInMemoryImpl;
-import com.eltonb.datatier.jdbc.dao.impl.DepartmentDaoJdbcImpl;
-import com.eltonb.datatier.jdbc.dao.impl.InstructorDaoInMemoryImpl;
-import com.eltonb.datatier.jdbc.dao.impl.InstructorDaoJdbcImpl;
+import com.eltonb.datatier.jdbc.dao.impl.*;
 import com.eltonb.datatier.jdbc.dao.interfaces.DepartmentDao;
 import com.eltonb.datatier.jdbc.dao.interfaces.InstructorDao;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class DaoFactory {
@@ -32,38 +27,55 @@ public class DaoFactory {
     private static DepartmentDaoInMemoryImpl memDepartmentDao;
     private static InstructorDaoInMemoryImpl memInstructorDao;
 
-    public static DepartmentDao departmentFactory() {
-        return departmentFactory(null);
+
+    public static DepartmentDao createDepartmentDao() {
+        return createDepartmentDao(null);
     }
 
-    public static DepartmentDao departmentFactory(Connection conn) {
+    public static DepartmentDao createDepartmentDao(Connection conn) {
         if ("jdbc".equals(factoryModel)) {
             DepartmentDaoJdbcImpl dao = new DepartmentDaoJdbcImpl();
             dao.setConnection(conn);
             return dao;
-        } else {
+        }
+
+        if ("textFile".equals(factoryModel)) {
+            return new DepartmentDaoTextFileImpl();
+        }
+
+        if ("memory".equals(factoryModel)) {
             if (memDepartmentDao == null) {
                 memDepartmentDao = new DepartmentDaoInMemoryImpl();
             }
             return memDepartmentDao;
         }
+
+        throw new IllegalArgumentException("Illegal factory model: " + factoryModel);
     }
 
-    public static InstructorDao instructorFactory() {
-        return instructorFactory(null);
+    public static InstructorDao createInstructorDao() {
+        return createInstructorDao(null);
     }
 
-    public static InstructorDao instructorFactory(Connection conn) {
+    public static InstructorDao createInstructorDao(Connection conn) {
         if ("jdbc".equals(factoryModel)) {
             InstructorDaoJdbcImpl dao = new InstructorDaoJdbcImpl();
             dao.setConnection(conn);
             return dao;
-        } else {
+        }
+
+        if ("textFile".equals(factoryModel)) {
+            return new InstructorsDaoTextFileImpl();
+        }
+
+        if ("memory".equals(factoryModel)) {
             if (memInstructorDao == null) {
                 memInstructorDao = new InstructorDaoInMemoryImpl();
             }
             return memInstructorDao;
         }
+
+        throw new IllegalArgumentException("Illegal factory model: " + factoryModel);
     }
 
 

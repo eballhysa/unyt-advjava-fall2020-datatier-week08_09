@@ -1,7 +1,6 @@
 package com.eltonb.datatier.jdbc.dao.impl;
 
 import com.eltonb.datatier.jdbc.dao.factory.DaoFactory;
-import com.eltonb.datatier.jdbc.dao.interfaces.DepartmentDao;
 import com.eltonb.datatier.jdbc.dao.interfaces.InstructorDao;
 import com.eltonb.datatier.jdbc.dao.model.Department;
 import com.eltonb.datatier.jdbc.dao.model.Instructor;
@@ -21,7 +20,7 @@ public class InstructorDaoInMemoryImpl implements InstructorDao {
     @Override
     public Department getDepartment(Instructor instructor) {
         return DaoFactory
-                .departmentFactory()
+                .createDepartmentDao()
                 .find(instructor.getDepartmentCode());
     }
 

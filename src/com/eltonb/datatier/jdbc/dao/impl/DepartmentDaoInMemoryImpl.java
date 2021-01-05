@@ -20,7 +20,7 @@ public class DepartmentDaoInMemoryImpl implements DepartmentDao {
 
     @Override
     public List<Instructor> getInstructors(Department department) {
-        InstructorDao instructorDao = DaoFactory.instructorFactory();
+        InstructorDao instructorDao = DaoFactory.createInstructorDao();
         return instructorDao.findAll()
                             .stream()
                             .filter(i -> i.getDepartmentCode().equals(department.getCode()))
@@ -29,7 +29,7 @@ public class DepartmentDaoInMemoryImpl implements DepartmentDao {
 
     @Override
     public Instructor getChair(Department department) {
-        InstructorDao instructorDao = DaoFactory.instructorFactory();
+        InstructorDao instructorDao = DaoFactory.createInstructorDao();
         return instructorDao.findAll()
                 .stream()
                 .filter(i -> i.getId() == department.getChairId())

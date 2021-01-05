@@ -39,8 +39,8 @@ public class DaoApp {
     }
 
     private void go1() {
-        instructorDao = DaoFactory.instructorFactory();
-        departmentDao = DaoFactory.departmentFactory();
+        instructorDao = DaoFactory.createInstructorDao();
+        departmentDao = DaoFactory.createDepartmentDao();
 
         seed();
         departmentDao.findAll().forEach(System.out::println);
@@ -99,8 +99,8 @@ public class DaoApp {
 
     private void go2() throws SQLException {
         try (Connection conn = newConnection()) {
-            instructorDao = DaoFactory.instructorFactory(conn);
-            departmentDao = DaoFactory.departmentFactory(conn);
+            instructorDao = DaoFactory.createInstructorDao(conn);
+            departmentDao = DaoFactory.createDepartmentDao(conn);
 
             instructorDao.findAll().forEach(System.out::println);
             Department chem = new Department();
