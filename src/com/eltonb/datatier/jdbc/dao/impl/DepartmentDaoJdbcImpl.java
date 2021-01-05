@@ -61,6 +61,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
                 stat.setNull(4, Types.INTEGER);
             else
                 stat.setLong(4, department.getChairId());
+            stat.execute();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -74,6 +75,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
             stat.setString(2, department.getFacultyCode());
             stat.setLong(3, department.getChairId());
             stat.setString(4, department.getCode());
+            stat.execute();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -84,6 +86,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
         String sql = "delete from departments where code = ?";
         try (CallableStatement stat = connection.prepareCall(sql)) {
             stat.setString(1, department.getCode());
+            stat.execute();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

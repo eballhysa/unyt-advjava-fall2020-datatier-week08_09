@@ -69,6 +69,7 @@ public class InstructorDaoJdbcImpl implements InstructorDao {
             stat.setString(2, instructor.getName());
             stat.setString(3, instructor.getSurname());
             stat.setString(4, instructor.getDepartmentCode());
+            stat.execute();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -82,6 +83,7 @@ public class InstructorDaoJdbcImpl implements InstructorDao {
             stat.setString(2, instructor.getSurname());
             stat.setString(3, instructor.getDepartmentCode());
             stat.setLong(4, instructor.getId());
+            stat.execute();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -93,6 +95,7 @@ public class InstructorDaoJdbcImpl implements InstructorDao {
         String sql = "delete from instructors where id = ?";
         try (CallableStatement stat = connection.prepareCall(sql)) {
             stat.setLong(1, instructor.getId());
+            stat.execute();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
