@@ -1,5 +1,7 @@
 package com.eltonb.datatier.jdbc.dao.impl;
 
+import com.eltonb.datatier.jdbc.dao.factory.DaoFactory;
+import com.eltonb.datatier.jdbc.dao.interfaces.InstructorDao;
 import com.eltonb.datatier.jdbc.dao.utils.JdbcUtils;
 import com.eltonb.datatier.jdbc.dao.interfaces.DepartmentDao;
 import com.eltonb.datatier.jdbc.dao.model.Department;
@@ -33,6 +35,21 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Department findOne(String code) throws Exception {
+        String sql = "select * from departments d where d.code = '" + code + "'";
+        Statement stat = connection.createStatement();
+        ResultSet rs = stat.executeQuery(sql);
+        Department d = null;
+        if (rs.next()) {
+            d = new Department();
+            d.setCode(rs.getString("code"));
+            d.setName(rs.getString("name"));
+        }
+        stat.close();
+        connection.close();
+        return d;
     }
 
     @Override
@@ -110,8 +127,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     @Override
     public Instructor getChair(Department department) {
-        InstructorDaoJdbcImpl instructorDao = new InstructorDaoJdbcImpl();
-        instructorDao.setConnection(this.connection);
+        InstructorDao instructorDao = DaoFactory.createInstructorDao(connection);
         return instructorDao.find(department.getChairId());
     }
 

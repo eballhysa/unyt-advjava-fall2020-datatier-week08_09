@@ -1,5 +1,7 @@
 package com.eltonb.datatier.jdbc.dao.impl;
 
+import com.eltonb.datatier.jdbc.dao.factory.DaoFactory;
+import com.eltonb.datatier.jdbc.dao.interfaces.DepartmentDao;
 import com.eltonb.datatier.jdbc.dao.utils.JdbcUtils;
 import com.eltonb.datatier.jdbc.dao.interfaces.InstructorDao;
 import com.eltonb.datatier.jdbc.dao.model.Department;
@@ -25,8 +27,7 @@ public class InstructorDaoJdbcImpl implements InstructorDao {
 
     @Override
     public Department getDepartment(Instructor instructor) {
-        DepartmentDaoJdbcImpl departmentDao = new DepartmentDaoJdbcImpl();
-        departmentDao.setConnection(this.connection);
+        DepartmentDao departmentDao = DaoFactory.createDepartmentDao(connection);
         return departmentDao.find(instructor.getDepartmentCode());
     }
 
@@ -51,6 +52,8 @@ public class InstructorDaoJdbcImpl implements InstructorDao {
         String sql = "select * from instructors i";
         try (PreparedStatement stat = connection.prepareStatement(sql)) {
             try (ResultSet rs = stat.executeQuery()) {
+                System.out.println(stat.getClass().getName());
+                System.out.println(rs.getClass().getName());
                 List<Instructor> instructors = new ArrayList<>();
                 while (rs.next())
                     instructors.add(JdbcUtils.newInstructor(rs));

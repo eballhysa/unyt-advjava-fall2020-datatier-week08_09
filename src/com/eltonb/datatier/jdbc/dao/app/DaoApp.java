@@ -99,10 +99,11 @@ public class DaoApp {
 
     private void go2() throws SQLException {
         try (Connection conn = newConnection()) {
+            System.out.println(conn.getClass().getName());
             instructorDao = DaoFactory.createInstructorDao(conn);
             departmentDao = DaoFactory.createDepartmentDao(conn);
-
             instructorDao.findAll().forEach(System.out::println);
+            /*
             Department chem = new Department();
             chem.setCode("CHEM");
             chem.setFacultyCode("NS");
@@ -111,6 +112,7 @@ public class DaoApp {
             departmentDao.findAll().forEach(System.out::println);
             Instructor chemistryChair = departmentDao.getChair(chem);
             System.out.println(chemistryChair);
+            */
         }
     }
 
